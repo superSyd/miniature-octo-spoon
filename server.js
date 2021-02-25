@@ -35,8 +35,8 @@ var listener = app.listen(process.env.PORT, function () {
 
 app.get("/api/timestamp", (req,res)=>{
 
-    myUnixDate = moment().unix()*1000;
-    myUtcDate = moment().format("ddd, D MMM YYYY HH:mm:ss");
+    myUnixDate = moment(Date.now()).unix()*1000;
+    myUtcDate = moment(Date.now()).format("ddd, DD MMM YYYY HH:mm:ss");
     timeZone = momentTimezone.tz(momentTimezone.tz.guess()).format('z');
 
     res.json({unix: myUnixDate, utc: myUtcDate +" "+timeZone})
@@ -58,16 +58,18 @@ app.get("/api/timestamp/:date_string?", (req,res)=>{
     myDate = new Date(date);
   
     myUnixDate = moment(myDate.toString()).unix() * 1000;
-    myUtcDate = moment(myDate.toString()).format("ddd, D MMM YYYY HH:mm:ss");
+    myUtcDate = moment(myDate.toString()).format("ddd, DD MMM YYYY HH:mm:ss");
   timeZone = momentTimezone.tz(momentTimezone.tz.guess()).format('z');
 
   } else if(!isNaN(date)){
 
   myDate = new Date(parseInt(date));
   
-  myUnixDate = moment(myDate.toString()).unix() * 1000;
-  myUtcDate = moment(myDate.toString()).format("ddd, D MMM YYYY HH:mm:ss");
+  myUnixDate = moment(myDate).unix() * 1000;
+  myUtcDate = moment(myDate.toString()).format("ddd, DD MMM YYYY HH:mm:ss");
   timeZone = momentTimezone.tz(momentTimezone.tz.guess()).format('z');
+
+  console.log(myDate)
 
   }
 
