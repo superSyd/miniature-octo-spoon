@@ -43,7 +43,7 @@ app.get("/api/timestamp", (req,res)=>{
 })
 
 
-app.get("/api/timestamp/:date_string", (req,res)=>{
+app.get("/api/timestamp/:date_string?", (req,res)=>{
   const date = req.params.date_string;
 
 
